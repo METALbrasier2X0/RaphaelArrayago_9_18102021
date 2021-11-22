@@ -37,10 +37,21 @@ export default class {
       .get()    
       .then(snapshot => {
         const bills = snapshot.docs
-        .sort(function(a, b){      
-                    return new Date (a.data().date) - new Date (b.data().date)
-                })
 
+        .sort(function(a, b){      
+              console.log()
+
+              var dateReg = /^\d{4}([./-])\d{2}\1\d{2}$/
+
+              a.data().date.match(dateReg)
+              b.data().date.match(dateReg)
+
+              let dateA = new Date(a.data().date) 
+              let dateB = new Date(b.data().date)
+
+              return dateB-dateA
+                })
+ /*           .reverse()*/
             .map(doc => {
             try {
               return {

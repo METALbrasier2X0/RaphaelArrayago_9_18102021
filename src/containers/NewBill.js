@@ -22,9 +22,10 @@ export default class NewBill {
     const fileName = filePath[filePath.length-1]
     const fileExt = fileName.split('.')
     const ext = fileExt[1]
+     const file_field = this.document.querySelector(`input[data-testid="file"]`)
 
     if (ext == "png" || ext == "jpg" || ext == "jpeg") {
-    const file_field = this.document.querySelector(`input[data-testid="file"]`)
+   
     file_field.setCustomValidity('')
     this.firestore
       .storage
@@ -36,7 +37,19 @@ export default class NewBill {
         this.fileName = fileName
       })
       }
+      
       else{
+        
+       this.firestore
+      .storage
+      .ref(`justificatifs/${fileName}`)
+      .put(file)
+      .then(snapshot => snapshot.ref.getDownloadURL())
+      .then(url => {
+        this.fileUrl = url
+        this.fileName = fileName
+      })
+
         const file_field = this.document.querySelector(`input[data-testid="file"]`)
         file_field.setCustomValidity('Fichié non supporté');}
   }
