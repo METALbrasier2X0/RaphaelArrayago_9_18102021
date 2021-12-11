@@ -39,7 +39,7 @@ export default class NewBill {
       }
       
       else{
-        
+        alert("Le format du fichié n'est pas bon")
        this.firestore
       .storage
       .ref(`justificatifs/${fileName}`)

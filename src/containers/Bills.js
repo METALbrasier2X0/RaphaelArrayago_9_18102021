@@ -39,7 +39,6 @@ export default class {
         const bills = snapshot.docs
 
         .sort(function(a, b){      
-              console.log()
 
               var dateReg = /^\d{4}([./-])\d{2}\1\d{2}$/
 
@@ -71,7 +70,6 @@ export default class {
             }
           })
           .filter(bill => bill.email === userEmail)
-          console.log('length', bills.length)
         return bills
       })
       .catch(error => error)
